@@ -11,7 +11,7 @@
 
    ![](./screenshot/todoform.png)
 
-2. When user click `Submit` it should show the to do item. The color of to-do item must match the to-do status:
+2. When user clicks `Submit` it should show the to do item. The color of to-do item must match the to-do status:
 
    - in-progress: blue
    - done : green
