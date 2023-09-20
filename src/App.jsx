@@ -2,36 +2,35 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [progress, setProgress] = useState("choose");
   const [todoList, setTodoList] = useState({
     todoTitle: "",
     todoDate: "",
     todoProgress: "",
   });
+  const [todoListArray, setTodoListArray] = useState([]);
 
   function handleTitle(event) {
-    setTitle(event.target.value);
+    setTodoList({ ...todoList, todoTitle: event.target.value });
   }
-  console.log(title, "title");
 
   function handleDate(event) {
-    setDate(event.target.value);
+    setTodoList({ ...todoList, todoDate: event.target.value });
   }
-  console.log(date, "date");
 
   function handleProgress(event) {
-    setProgress(event.target.value);
+    setTodoList({ ...todoList, todoProgress: event.target.value });
   }
-  function handleSubmit() {
-    setTodoList({
-      todoTitle: title,
-      todoDate: date,
-      todoProgress: progress,
-    });
+  function addTodo() {
+    setTodoListArray([...todoListArray, todoList]);
   }
-  console.log(todoList, "todoList");
+  }
+
+
+  function addTodo() {
+    const list = todoListArray;
+    list.push(todoList);
+    setTodoListArray([...todoListArray, todoList]);
+  }
 
   return (
     <div className="App">
@@ -60,7 +59,7 @@ function App() {
       <label>
         Progress:
         <span> </span>
-        <select name="progress" value={progress} onChange={handleProgress}>
+        <select name="progress" value={todoList.todoProgress} onChange={handleProgress}>
           <option disabled>choose</option>
           <option>in progress</option>
           <option>done</option>
@@ -81,5 +80,7 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;
