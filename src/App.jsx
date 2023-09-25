@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [todoList, setTodoList] = useState({
+  const [todoItem, setTodoItem] = useState({
     todoTitle: "",
     todoDate: "",
     todoProgress: "",
@@ -10,27 +10,27 @@ function App() {
   const [todoListArray, setTodoListArray] = useState([]);
 
   function handleTitle(event) {
-    setTodoList({ ...todoList, todoTitle: event.target.value });
+    setTodoItem({ ...todoItem, todoTitle: event.target.value });
   }
 
   function handleDate(event) {
-    setTodoList({ ...todoList, todoDate: event.target.value });
+    setTodoItem({ ...todoItem, todoDate: event.target.value });
   }
 
   function handleProgress(event) {
-    setTodoList({ ...todoList, todoProgress: event.target.value });
+    setTodoItem({ ...todoItem, todoProgress: event.target.value });
   }
   function addTodo() {
-    setTodoListArray([...todoListArray, todoList]);
-  }
+    setTodoListArray([...todoListArray, todoItem]);
   }
 
+  todoListArray.map((newItem) => console.log(newItem, "newItem"));
 
-  function addTodo() {
-    const list = todoListArray;
-    list.push(todoList);
-    setTodoListArray([...todoListArray, todoList]);
-  }
+  // function addTodo() {
+  //   const list = todoListArray;
+  //   list.push(todoList);
+  //   setTodoListArray([...todoListArray, todoItem]);
+  // }
 
   return (
     <div className="App">
@@ -42,7 +42,7 @@ function App() {
           <input
             type="text"
             name="title"
-            value={title}
+            value={todoItem.todoTitle}
             onChange={handleTitle}
           />
         </label>
@@ -51,7 +51,12 @@ function App() {
         <label>
           Date:
           <span> </span>
-          <input type="date" name="date" value={date} onChange={handleDate} />
+          <input
+            type="date"
+            name="date"
+            value={todoItem.todoDate}
+            onChange={handleDate}
+          />
         </label>
         <br />
         <br />
@@ -59,28 +64,35 @@ function App() {
       <label>
         Progress:
         <span> </span>
-        <select name="progress" value={todoList.todoProgress} onChange={handleProgress}>
-          <option disabled>choose</option>
+        <select
+          type="text"
+          name="progress"
+          value={todoItem.todoProgress}
+          onChange={handleProgress}
+        >
+          <option selected>select</option>
+          <option>not started</option>
           <option>in progress</option>
           <option>done</option>
-          <option>not started</option>
         </select>
       </label>
       <span> </span>
-      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={addTodo}>Submit</button>
       <h1>To do list</h1>
 
       <table className="table">
         <tr>
-          <td>{todoList.todoTitle}</td>
-          <td>{todoList.todoDate}</td>
-          <td>{todoList.todoProgress}</td>
+          {todoListArray.map((newItem) => (
+            <>
+              <td>{newItem.todoTitle}</td>
+              <td>{newItem.todoDate}</td>
+              <td>{newItem.todoProgress}</td>
+            </>
+          ))}
         </tr>
       </table>
     </div>
   );
 }
-
-
 
 export default App;
