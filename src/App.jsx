@@ -22,6 +22,9 @@ function App() {
   }
   function addTodo() {
     setTodoListArray([...todoListArray, todoItem]);
+
+    // setTodoListArray to empty
+    setTodoItem({ todoTitle: "", todoDate: "", todoProgress: "" });
   }
 
   todoListArray.map((newItem) => console.log(newItem, "newItem"));
@@ -31,6 +34,13 @@ function App() {
   //   list.push(todoList);
   //   setTodoListArray([...todoListArray, todoItem]);
   // }
+
+  function deleteTodoItem(todoItem) {
+    const result = todoListArray.filter(
+      (todoItem) => todoItem.todoTitle !== todoItem.todoTitle
+    );
+    setTodoListArray(result);
+  }
 
   return (
     <div className="App">
@@ -71,22 +81,24 @@ function App() {
           onChange={handleProgress}
         >
           <option selected>select</option>
-          <option>not started</option>
-          <option>in progress</option>
-          <option>done</option>
+          <option value="notStarted">not started</option>
+          <option value="inProgress">in progress</option>
+          <option value="done">done</option>
         </select>
       </label>
       <span> </span>
       <button onClick={addTodo}>Submit</button>
+
       <h1>To do list</h1>
 
       <table className="table">
         <tr>
           {todoListArray.map((newItem) => (
             <>
+              <td className={newItem.todoProgress}>{newItem.todoProgress}</td>
               <td>{newItem.todoTitle}</td>
               <td>{newItem.todoDate}</td>
-              <td>{newItem.todoProgress}</td>
+              <button onClick={() => deleteTodoItem()}>delete</button>
             </>
           ))}
         </tr>

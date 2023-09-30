@@ -11,3 +11,21 @@
   table-layout: fixed;
   word-wrap: break-word;
 }
+
+.inProgress {
+  height: 80%;
+  width: 20%;
+  background-color: blue;
+}
+
+.done {
+  height: 80%;
+  width: 20%;
+  background-color: green;
+}
+
+.notStarted {
+  height: 80%;
+  width: 20%;
+  background-color: red;
+}
